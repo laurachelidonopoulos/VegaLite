@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seats/Party in 2018</title>
+
+    <!-- IMPORTING THE LIBRARIES VIA CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <!-- ------------------------------- -->
+
+</head>
+
+<body>
+    
+    <div id="i-wanna-place-the-plot-here"></div> 
+
+    <script>
+        /* -------------- BUILDING THE VEGA-LITE VIEW SPECS -------------- */
+        let vegaLiteViewSpecifications = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": 400,
+    "width": 400,
+    "title": "Seats per Party in the Brazilian Chamber of Deputies (2018)",
+    "data": { 
+        "url": "data/seats_2018.csv"
+    },
+    "transform": [
+      {
+          "filter": 
+          {
+            "not": 
+            {"field": "party", "equal": "Total"}
+          }
+      }
+    ],
+    "mark": {"type": "bar", "tooltip": {"content": "data"},
+  },
+    "encoding": {
+      "x": {"field": "party", "type": "nominal", "title": "Party"},
+      "y": {"field": "seats", "type": "quantitative", "title": "Number of seats"}
+    }
+};
+        /* --------------------------------------------------------------- */
+
+        
+
+        /* -------------- RUNNING THE VEGA-LITE VIEW SPECS -------------- */
+        vegaEmbed('#i-wanna-place-the-plot-here', vegaLiteViewSpecifications);
+        /* --------------------------------------------------------------- */
+    </script>
+    
+</body>
+
+</html>
+
+
+
+
